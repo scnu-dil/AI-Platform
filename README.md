@@ -3,7 +3,7 @@
 > A Vue.js project
 
 # Preparation
-You need to install node and git locally. The project is based on vue, vue-router, vue-cli, axios(later) and element-ui. Understanding and learning this knowledge in advance will greatly help the use of this project.
+You need to install node and git locally. The project is based on vue, vue-router, vue-cli, axios(later) and element-ui. 
 
 ## Build Setup
 
