@@ -2,29 +2,30 @@
 
 > A Vue.js project
 
+# Preparation
+You need to install node and git locally. The project is based on vue, vue-router, vue-cli, axios(later) and element-ui. Understanding and learning this knowledge in advance will greatly help the use of this project.
+
 ## Build Setup
 
+# 1、新建文件夹AI-Platform,cd,然后安装依赖,自动生成node_modules
 ``` bash
 # install dependencies
 npm install
-
-# serve with hot reload at localhost:8080
+```
+# 或者可通过安装TB镜像提升下载速度
+``` 
+# install dependencies
+npm install cnpm -g --registry=https://registry.npm.taobao.org
+cnpm install
+```
+# 2、启动项目at localhost:8080（端口号根据自己的进行修改）
+``` 
 npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Update log
+
+# 20190606第一次更新：
+目前写好了主界面以及自然语言处理的极简页面。（字体大小及位置、图片、内容都会继续添加和修改）
+
+
