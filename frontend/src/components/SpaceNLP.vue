@@ -7,13 +7,15 @@
     </el-header>
     <el-main>
       <el-input placeholder="请输入内容" v-model="input" clearable></el-input>
-      <el-button type="primary" name="submit" onclick="onSubmit()" round>开始分析</el-button>
+      <!-- <el-button type="primary" name="submit" onclick="onSubmit()" round>开始分析</el-button> -->
+      <el-button type="primary" name="submit" @click="onSubmit" round>开始分析</el-button>  
       <br>
       <hr>
       <div id="nlpbox">
         <div class="nlpbox1">
           <h2>Word Segmentation</h2>
-          <input type="text" class="from_input" placeholder="结果显示">
+          <!-- <input type="text" class="from_input" placeholder="结果显示"> -->
+          <input type="text" class="from_input" placeholder="分词结果显示" v-model=split_result>
         </div>
         <div class="nlpbox1">
           <h2>Part-of-Speech tagging</h2>
@@ -38,15 +40,35 @@
 
 <script>
 import HeaderTop from "./HeaderTop";
+import axios from 'axios'
 
 export default {
+  name: 'SpaceNLP',
   data() {
     return {
-      input: ""
+      input: "",
+      split_result: 0
     };
   },
   components: {
     headertop: HeaderTop
+  },
+  mounted(){
+    this.onSubmit()
+  },
+  methods: {
+    onSubmit () {
+      const path = `http://127.0.0.1:5000/api/random`;
+      
+      axios.get(path,
+      {params: {input: this.input}})
+        .then(response => {
+          this.split_result = response.data.split_result;
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 };
 </script>
