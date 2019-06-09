@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="home">
     <router-view></router-view>
     <el-container>
       <el-header height="60px">
@@ -46,7 +46,8 @@ export default {
 };
 </script>
 
-<style>
+
+<!--
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -54,6 +55,9 @@ export default {
   text-align: left;
   color: #2c3e50;
 }
+</style>
+-->
+<style>
 body {
   margin: 0px;
 }
@@ -64,11 +68,20 @@ body {
   padding: 0px;
 }
 .el-menu--horizontal > .el-menu-item {
-  float: left;
+  float: right;
 }
 .el-menu--horizontal > .el-submenu {
-  float: t;
+  float: right;
 }
+/* .el-mains {
+  background-color: #fff;
+} */
+/* .el-main {
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+} */
 .col1 {
   background-color: #e0e7ee;
 }
