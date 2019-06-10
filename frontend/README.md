@@ -23,7 +23,11 @@ npm install
 npm install cnpm -g --registry=https://registry.npm.taobao.org
 cnpm install
 ```
-#### 2、启动项目at localhost:8080（端口号根据自己的进行修改）
+#### 2、增添axios相关包
+``` 
+npm install --save axios
+```
+#### 3、启动项目at localhost:8080（端口号根据自己的进行修改）
 ``` 
 npm run dev
 ```
