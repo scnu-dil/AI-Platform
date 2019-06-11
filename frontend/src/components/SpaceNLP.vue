@@ -19,11 +19,11 @@
         </div>
         <div class="nlpbox1">
           <h2>Part-of-Speech tagging</h2>
-          <input type="text" class="from_input" placeholder="结果显示">
+          <input type="text" class="from_input" placeholder="词性分析结果显示" v-model=word_tag>
         </div>
-        <div class="nlpbox1">
+        <div class="nlpbox1">   
           <h2>Named Entity Recognition</h2>
-          <input type="text" class="from_input" placeholder="结果显示">
+          <input type="text" class="from_input" placeholder="命名结果显示">
         </div>
         <div class="nlpbox1">
           <h2>Syntactic parsing</h2>
@@ -31,7 +31,7 @@
         </div>
         <div class="nlpbox1">
           <h2>Keywords</h2>
-          <input type="text" class="from_input" placeholder="结果显示">
+          <input type="text" class="from_input" placeholder="关键词提取结果显示" v-model=key_word>
         </div>
       </div>
     </el-main>
@@ -46,8 +46,10 @@ export default {
   name: 'SpaceNLP',
   data() {
     return {
-      input: "",
-      split_result: 0
+      input: "华南师范大学数据智能实验室AI平台",
+      split_result: "",
+      word_tag: "",
+      key_word: ""
     };
   },
   components: {
@@ -58,12 +60,14 @@ export default {
   },
   methods: {
     onSubmit () {
-      const path = `http://127.0.0.1:5000/api/random`;
+      const path = `http://127.0.0.1:5000/api/nlp`;
       
       axios.get(path,
       {params: {input: this.input}})
         .then(response => {
-          this.split_result = response.data.split_result;
+          this.split_result = response.data.split_result
+          this.word_tag = response.data.word_tag
+          this.key_word = response.data.key_word
         })
         .catch(error => {
           console.log(error)
