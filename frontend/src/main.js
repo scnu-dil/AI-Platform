@@ -13,11 +13,13 @@ Vue.use(ElementUI)
 Vue.use(VueRouter)
 
 import Home from "./components/Home.vue";
-import SpaceNLP from "./components/SpaceNLP.vue"
+import SpaceNLP from "./components/SpaceNLP.vue";
+import TextSummar from "./components/TextSummar.vue";
 
 const routes = [
   { path: '/home', component: Home },
   { path: '/spacenlp', component: SpaceNLP },
+  { path: '/textsummar', component: TextSummar },
   { path: '*', redirect: '/home' }   /*默认跳转路由*/
 ]
 
@@ -33,7 +35,8 @@ new Vue({
   components: {
     App,
     home: Home,
-    spcenlp: SpaceNLP
+    spcenlp: SpaceNLP,
+    textsummar: TextSummar
   },
   template: '<App/>'
 })

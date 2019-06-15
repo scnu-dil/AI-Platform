@@ -13,7 +13,7 @@ export default new Router({
     // }
     {
       path: '/',
-      component: Home => require(['../components/Home'], Home),
+      component: Home => require(['../components/Home'], Home)
     },
     {
       path: '/',

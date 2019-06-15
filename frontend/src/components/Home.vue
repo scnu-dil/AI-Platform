@@ -73,6 +73,15 @@ body {
 .el-menu--horizontal > .el-submenu {
   float: right;
 }
+/* .el-mains {
+  background-color: #fff;
+} */
+/* .el-main {
+  background-color: #fff;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+} */
 .col1 {
   background-color: #e0e7ee;
 }

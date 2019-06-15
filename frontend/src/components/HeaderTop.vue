@@ -13,7 +13,6 @@
       <el-submenu index="2">
         <template slot="title" class="atext">我的工作台</template>
         <el-menu-item index="2-1" style="text-align:left">自然语言处理</el-menu-item>
-          <>
         <el-menu-item index="2-2">情绪识别</el-menu-item>
         <el-menu-item index="2-3">动作识别</el-menu-item>
         <el-submenu index="2-4">
@@ -25,7 +24,7 @@
       </el-submenu>
       <el-menu-item index="3" class="atext">消息中心</el-menu-item>
       <el-menu-item index="4">
-        <a href="https://www.baidu.com" target="_blank" class="atext">联系我们</a>
+        <a href="http://localhost:8081/#/home" class="atext">主页</a>
       </el-menu-item>
     </el-menu>
     <div></div>
