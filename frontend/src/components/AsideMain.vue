@@ -40,7 +40,9 @@
             <!-- <span>自然语言处理</span> -->
           </template>
           <el-menu-item index="3-1">文本分词</el-menu-item>
-          <el-menu-item index="3-2">词性标注</el-menu-item>
+          <el-menu-item index="3-2">
+            <router-link to="/TextSummar">文本摘要</router-link>
+          </el-menu-item>
           <el-menu-item index="3-3">语法分析</el-menu-item>
           <el-submenu index="3-4">
             <template slot="title">句法分析</template>
@@ -88,6 +90,12 @@ export default {
   }
 };
 </script>
+<style>
+a:-webkit-any-link {
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+}
+</style>
 
 
 
