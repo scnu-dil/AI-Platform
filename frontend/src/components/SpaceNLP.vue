@@ -8,17 +8,17 @@
     <el-main>
       <div id="topbox">
         <el-input placeholder="请输入一个句子" v-model="input" clearable></el-input>
-        <el-button type="primary" name="submit" onclick="onSubmit()" round>开始分析</el-button>
+        <el-button type="primary" name="submit" @click="onSubmit" round>开始分析</el-button>
       </div>
       <hr>
       <div id="nlpbox">
         <div class="nlpbox1">
           <h2>Word Segmentation</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ split_result }}</textarea>
         </div>
         <div class="nlpbox1">
           <h2>Part-of-Speech tagging</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ word_tag }}</textarea>
         </div>
         <div class="nlpbox1">
           <h2>Named Entity Recognition</h2>
@@ -30,7 +30,7 @@
         </div>
         <div class="nlpbox1">
           <h2>Keywords</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ key_word }}</textarea>
         </div>
       </div>
     </el-main>
@@ -39,17 +39,39 @@
 
 <script>
 import HeaderTop from "./HeaderTop";
+import axios from 'axios'
 
 export default {
+  name: 'SpaceNLP',
   data() {
     return {
-      input: ""
+      input: "数据智能实验室",
+      split_result: "",
+      word_tag: "",
+      key_word: ""
     };
   },
   components: {
     headertop: HeaderTop
+  },
+  methods: {
+    onSubmit() {
+      const path = `http://47.107.228.165/api/nlp`;
+
+      axios.get(path,
+      {params: {input: this.input}})
+        .then(response => {
+          this.split_result = response.data.split_result
+          this.word_tag = response.data.word_tag
+          this.key_word = response.data.key_word
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 };
+
 </script>
 
 <style>
