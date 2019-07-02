@@ -9,19 +9,19 @@
       <div id="intext">
         <h2>Subtitle</h2>
         <div class="summarization">
-          <input placeholder="请输入标题" class="subinput">
+          <input placeholder="请输入标题" class="subinput" v-model="sub_input">
         </div>
         <div class="stext">
-          <textarea type="submit" placeholder="请输入正文" class="textinput"></textarea>
+          <textarea type="submit" placeholder="请输入正文" class="textinput" v-model="text_input"></textarea>
           <!-- <div class="surebutton"> -->
-          <el-button type="primary" name="submit" onclick="onSubmit()" round>生成摘要</el-button>
+          <el-button type="primary" name="submit" @click="onSubmit" round>生成摘要</el-button>
           <!-- </div> -->
         </div>
       </div>
       <div id="outtext">
         <h2>Text Summarization</h2>
         <div class="oputtext">
-          <textarea placeholder="结果显示" class="from_input"></textarea>
+          <textarea placeholder="结果显示" class="from_input">{{ summary_result }}</textarea>
           <!-- <input type="text" class="from_input" placeholder="结果显示"> -->
         </div>
       </div>
@@ -31,15 +31,33 @@
 
 <script>
 import HeaderTop from "./HeaderTop";
+import axios from "axios" 
 
 export default {
   data() {
     return {
-      input: ""
+      sub_input: "",
+      text_input: "",
+      summary_result: ""
     };
   },
   components: {
     headertop: HeaderTop
+  },
+  methods: {
+    onSubmit() {
+      const path = `http://47.107.228.165/api/summary`;
+
+      axios.get(path,
+      {params: {sub_input: this.sub_input,
+		text_input: this.text_input}})
+        .then(response => {
+          this.summary_result = response.data.result
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 };
 </script>
