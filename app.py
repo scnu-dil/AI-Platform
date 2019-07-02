@@ -1,11 +1,9 @@
-
-
+import os
 from flask import Flask, render_template, request
 from flask import jsonify
 from flask_cors import CORS
-#import jieba.posseg as pseg
 from snownlp import SnowNLP
-# import unicode
+from textsummary import TextSummary
 
 app = Flask(__name__,
             static_folder="./frontend/dist/static",
@@ -40,6 +38,20 @@ def home():
     'key_word': key_words
   }
 
+  return jsonify(response)
+
+@app.route('/api/summary')
+def text_summa():
+  title = request.args.get('sub_input')
+  text = request.args.get('text_input')
+  textsummary = TextSummary()
+  textsummary.SetText(title, text)
+  summary = textsummary.CalcSummary()
+  summary_result = "".join(summary)
+  response = {
+    'result': summary_result
+  }
+  
   return jsonify(response)
 
 @app.route('/', defaults={'path': ''})
