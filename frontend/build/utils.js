@@ -48,11 +48,11 @@ exports.cssLoaders = function (options) {
       return ExtractTextPlugin.extract({
         use: loaders,
         fallback: 'vue-style-loader',
-<<<<<<< HEAD
-        publicPath: '../../'
-=======
+//<<<<<<< HEAD
+//        publicPath: '../../'
+//=======
         publicPath: '../../'   //新加的路径
->>>>>>> optimization
+//>>>>>>> optimization
       })
     } else {
       return ['vue-style-loader'].concat(loaders)
