@@ -44,7 +44,11 @@ export default {
 };
 </script>
 
+<<<<<<< HEAD
 <style>
+=======
+<style scoped>
+>>>>>>> 769298e9bbc5b4eb027222da29a6c2f090af9ba6
 body {
   margin: 0px;
 }
@@ -148,4 +152,8 @@ h2 {
   /* WebKit browsers */
   color: rgb(182, 181, 181);
 }
+<<<<<<< HEAD
 </style>
+=======
+</style>
+>>>>>>> 769298e9bbc5b4eb027222da29a6c2f090af9ba6

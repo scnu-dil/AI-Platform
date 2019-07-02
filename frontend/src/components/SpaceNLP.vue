@@ -6,18 +6,19 @@
       <headertop></headertop>
     </el-header>
     <el-main>
-      <el-input placeholder="请输入一个句子" v-model="input" clearable></el-input>
-      <el-button type="primary" name="submit" onclick="onSubmit()" round>开始分析</el-button>
-      <br>
+      <div id="topbox">
+        <el-input placeholder="请输入一个句子" v-model="input" clearable></el-input>
+        <el-button type="primary" name="submit" @click="onSubmit" round>开始分析</el-button>
+      </div>
       <hr>
       <div id="nlpbox">
         <div class="nlpbox1">
           <h2>Word Segmentation</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ split_result }}</textarea>
         </div>
         <div class="nlpbox1">
           <h2>Part-of-Speech tagging</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ word_tag }}</textarea>
         </div>
         <div class="nlpbox1">
           <h2>Named Entity Recognition</h2>
@@ -29,7 +30,7 @@
         </div>
         <div class="nlpbox1">
           <h2>Keywords</h2>
-          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly"></textarea>
+          <textarea type="text" class="from_input" placeholder="结果显示" readonly="readonly">{{ key_word }}</textarea>
         </div>
       </div>
     </el-main>
@@ -38,38 +39,60 @@
 
 <script>
 import HeaderTop from "./HeaderTop";
+import axios from 'axios'
 
 export default {
+  name: 'SpaceNLP',
   data() {
     return {
-      input: ""
+      input: "数据智能实验室",
+      split_result: "",
+      word_tag: "",
+      key_word: ""
     };
   },
   components: {
     headertop: HeaderTop
+  },
+  methods: {
+    onSubmit() {
+      const path = `http://47.107.228.165/api/nlp`;
+
+      axios.get(path,
+      {params: {input: this.input}})
+        .then(response => {
+          this.split_result = response.data.split_result
+          this.word_tag = response.data.word_tag
+          this.key_word = response.data.key_word
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 };
+
 </script>
 
 <style>
 body {
-  margin: 0px;
+  margin: 0em;
 }
 .el-header {
   background-color: #b3c0d1;
   color: #333;
   text-align: center;
-  line-height: 60px;
-  padding: 0px;
+  line-height: 2em;
+  padding: 0em;
 }
 .el-main {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
-  line-height: 80px;
+  line-height: 5em;
 }
 body > .el-container {
-  margin-bottom: 40px;
+  margin-bottom: 2.5em;
 }
 .el-menu--horizontal > .el-menu-item {
   float: right;
@@ -77,19 +100,24 @@ body > .el-container {
 .el-menu--horizontal > .el-submenu {
   float: right;
 }
+#topbox {
+  width: 95%;
+  padding: 0em 4.8em 1.2em 15em;
+  text-align: left;
+}
 .el-input {
-  font-size: 14px;
-  height: 40px;
+  font-size: 1em;
+  height: 2.5em;
   width: 60%;
 }
 #nlpbox {
-  width: 60%;
-  padding: 0px 100px 20px 240px;
+  width: 90%;
+  padding: 0em 5.2em 1.2em 15em;
   text-align: left;
 }
 .nlpbox1 {
-  height: 230px;
-  width: 100%;
+  height: 12em;
+  width: 80%;
 }
 h2 {
   margin-block-start: 0.2em;
@@ -99,14 +127,14 @@ h2 {
   -webkit-appearance: none;
   background-color: #fff;
   background-image: none;
-  font-size: 16px;
-  height: 150px;
+  font-size: 1.2em;
+  height: 8em;
   width: 90%;
-  border-radius: 4px;
+  border-radius: 0.3em;
   box-sizing: border-box;
   border: 1px solid #dcdfe6;
   outline: 0;
-  padding: 10px 15px;
+  padding: 0.3em 0.7em;
 }
 ::-webkit-input-placeholder {
   /* WebKit browsers */
