@@ -1,15 +1,13 @@
-
-
+import os
 from flask import Flask, render_template, request
 from flask import jsonify
 from flask_cors import CORS
-import jieba.posseg as pseg
 from snownlp import SnowNLP
-# import unicode
+from textsummary import TextSummary
 
 app = Flask(__name__,
-            static_folder="./dist/static",
-            template_folder="./dist")
+            static_folder="./frontend/dist/static",
+            template_folder="./frontend/dist")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 def word_split(text):
@@ -42,13 +40,27 @@ def home():
 
   return jsonify(response)
 
-# @app.route('/', defaults={'path': ''})
-# @app.route('/<path:path>')
-# def catch_all(path):
+@app.route('/api/summary')
+def text_summa():
+  title = request.args.get('sub_input')
+  text = request.args.get('text_input')
+  textsummary = TextSummary()
+  textsummary.SetText(title, text)
+  summary = textsummary.CalcSummary()
+  summary_result = "".join(summary)
+  response = {
+    'result': summary_result
+  }
+  
+  return jsonify(response)
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def catch_all(path):
 #     # if app.debug:
 #     #     return requests.get('http://localhost:8080/{}'.format(path)).text
-#     return render_template("index.html")
+    return render_template("index.html")
 
 if __name__ == '__main__':
-  app.run()
+  app.run(host="47.107.228.165")
 
