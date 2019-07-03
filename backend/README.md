@@ -9,6 +9,8 @@
 
 ```
 //进入down后的AI-Platform/backend目录
+~$ virtualenv -p python venv
+~$ pip install -r ../requirement.txt
 ~$ source venv/bin/activate
 //直接运行manager.py
 （venv）python manager.py
@@ -17,10 +19,3 @@
 具体操作移步至frontend阅读README
 ```
 
-
-# 更新记录
-2019.6.10
-随着前端的完成，增加后台的中文分词模块功能。（暂时采用结巴分词，日后再部署更佳的模型）
-
-2019.6.11
-采用Snownlp增加词性标注和关键词提取功能。（由于结巴分词首次加载速度缓慢，因此更换为Snownlp模型）
