@@ -1,3 +1,4 @@
+# coding=utf-8
 import os
 from flask import Flask, render_template, request
 from flask import jsonify
@@ -52,6 +53,15 @@ def text_summa():
     'result': summary_result
   }
   
+  return jsonify(response)
+
+@app.route('/api/chat')
+def chat_robot():
+  right = 'Hello'
+  response = {
+    'robot': right
+  }
+
   return jsonify(response)
 
 @app.route('/', defaults={'path': ''})
