@@ -10,6 +10,7 @@ import Query from '@/pages/DataCollection/Query'
 import TextSummar from '@/pages/SpaceNLP/TextSummar'
 import TextSplit from '@/pages/SpaceNLP/TextSplit'
 import ChatRobot from '@/pages/SpaceNLP/ChatRobot'
+import Chat from '@/pages/SpaceNLP/Chat'
 
 Vue.use(Router)
 
@@ -61,7 +62,19 @@ export default new Router({
           name: '聊天机器人',
           path: '/SpaceNLP/ChatRobot',
           component: ChatRobot
+        },
+        {
+          name: '对话系统',
+          path: '/SpaceNLP/Chat',
+          component: Chat
         }
+        // children:[
+        //   {
+        //     name: '对话系统',
+        //     path: '/SpaceNLP/Chat',
+        //     component: Chat
+        //   }
+        // ]
       ]
     }
   ]
