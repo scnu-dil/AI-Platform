@@ -69,13 +69,16 @@ export const menuGroup = [
         name: '聊天机器人'
       },
       {
-        label: '句法分析',
-        children: [
-          {
-            label: '语法分析',
-            path: ''
-          }
-        ]
+        label: '对话系统',
+        path: '',
+        name: '对话系统'
+        // children: [
+        //   {
+        //     label: '对话系统',
+        //     path: '',
+        //     name: '对话系统'
+        //   }
+        // ]
       }
     ]
   },

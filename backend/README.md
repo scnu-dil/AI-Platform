@@ -11,8 +11,8 @@
 //进入down后的AI-Platform/backend目录
 ~$ virtualenv --no-site-packages venv
 //安装前期已有的依赖包
-~$ pip install -r ../requirement.txt
 ~$ source venv/bin/activate
+~$ pip install -r ../requirement.txt
 //直接运行manager.py
 （venv）python manager.py
 
