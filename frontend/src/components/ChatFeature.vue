@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="chat-footer" @click="onTogglePop()">
-      <el-input class="send-msg" placeholder="请输入消息内容" />
+      <el-input class="send-msg" placeholder v-model="input" clearable></el-input>
       <el-button class="send-sure">发送</el-button>
     </div>
     <!-- <div class="send-msg-pop animatd fast" :class="[togglePop ? 'slideInup' : 'slideOutDown']">
@@ -41,9 +41,14 @@ export default {
       }
     }
   },
-  data: function() {
+  // data: function() {
+  //   return {
+  //     togglePop: false // 展示浮窗
+  //   };
+  // },
+  data() {
     return {
-      togglePop: false // 展示浮窗
+      input: ""
     };
   },
   methods: {
@@ -82,7 +87,7 @@ export default {
 .send-msg {
   position: float;
   display: inline-block;
-  width: 86%;
+  width: 80%;
   height: 30px;
   border-radius: 4px;
   float: left;
@@ -91,6 +96,9 @@ export default {
   text-align: left;
   line-height: 30px;
   padding-left: 0px;
+}
+.el-input {
+  width: 80%;
 }
 .send-sure {
   display: inline-block;
