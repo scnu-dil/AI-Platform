@@ -1,4 +1,3 @@
-# coding=utf-8
 import os
 from flask import Flask, render_template, request
 from flask import jsonify
@@ -7,8 +6,8 @@ from snownlp import SnowNLP
 from textsummary import TextSummary
 
 app = Flask(__name__,
-            static_folder="./frontend/dist/static",
-            template_folder="./frontend/dist")
+            static_folder="../frontend/dist/static",
+            template_folder="../frontend/dist")
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 
 def word_split(text):
@@ -16,7 +15,7 @@ def word_split(text):
   split_result = ""
   words = SnowNLP(text).words
   for w in words:
-    split_result += str(w)+ "/"
+    split_result += str(w)+ "  "
   return split_result
 
 def Part_of_Speech_tagging(text):
@@ -24,7 +23,7 @@ def Part_of_Speech_tagging(text):
   word_tag = ""
   s = SnowNLP(text)
   for w in s.tags:
-    word_tag += w[0] + "->" + w[1] + "/"
+    word_tag += w[0] + "/" + w[1] + "  "
   key = s.keywords(3)
   return word_tag, key
 
@@ -48,7 +47,7 @@ def text_summa():
   textsummary = TextSummary()
   textsummary.SetText(title, text)
   summary = textsummary.CalcSummary()
-  summary_result = "".join(summary)
+  summary_result = "\n".join(summary)
   response = {
     'result': summary_result
   }
@@ -57,9 +56,9 @@ def text_summa():
 
 @app.route('/api/chat')
 def chat_robot():
-  right = 'Hello'
+  left = "hello"
   response = {
-    'robot': right
+    'left_msg': left
   }
 
   return jsonify(response)
@@ -73,4 +72,5 @@ def catch_all(path):
 
 if __name__ == '__main__':
   app.run(host="47.107.228.165")
+  #app.run()
 
