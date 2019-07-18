@@ -1,8 +1,13 @@
 <template>
   <div>
     <div class="chat-footer" @click="onTogglePop()">
-      <el-input class="send-msg" placeholder v-model="input" clearable></el-input>
-      <el-button class="send-sure">发送</el-button>
+<!-- <<<<<<< Updated upstream -->
+<!--       <el-input class="send-msg" placeholder v-model="input" clearable></el-input>
+      <el-button class="send-sure" @click="onSubmit">发送</el-button> -->
+<!-- =======
+      <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input>
+      <el-button class="send-sure" @click="onSubmit">发送</el-button> 
+>>>>>>> Stashed changes -->
     </div>
     <!-- <div class="send-msg-pop animatd fast" :class="[togglePop ? 'slideInup' : 'slideOutDown']">
       <div class="chat-footer">
@@ -48,26 +53,31 @@ export default {
   // },
   data() {
     return {
-      input: ""
+      input: "",
+      input2chat: ""
     };
   },
   methods: {
-    // 控制pop的显示和隐藏
-    onTogglePop: function() {
-      // 当”对方“正在输入的时候，不允许点击
-      if (this.inputDisable) {
-        return;
-      }
-      this.togglePop = !this.togglePop;
-    },
-    // 选择要说的话
-    onRightSelectMsg: function(item) {
-      // 调用父组件（Chat.vue）中的onRightSelectMsg方法
-      console.log("ChatFeature.vue # onRightSelectMsg");
-      this.$emit("onRightSelectMsg", item);
-      // 隐藏展示浮层
-      this.togglePop = false;
-    }
+      // onSubmit () {
+      //   this.loadChatData()
+      //   this.scrollContent()
+      // }
+    // // 控制pop的显示和隐藏
+    // onTogglePop: function() {
+    //   // 当”对方“正在输入的时候，不允许点击
+    //   if (this.inputDisable) {
+    //     return;
+    //   }
+    //   this.togglePop = !this.togglePop;
+    // },
+    // // 选择要说的话
+    // onRightSelectMsg: function(item) {
+    //   // 调用父组件（Chat.vue）中的onRightSelectMsg方法
+    //   console.log("ChatFeature.vue # onRightSelectMsg");
+    //   this.$emit("onRightSelectMsg", item);
+    //   // 隐藏展示浮层
+    //   this.togglePop = false;
+    // }
   }
 };
 </script>

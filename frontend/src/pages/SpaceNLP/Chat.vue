@@ -15,130 +15,87 @@
             </ul>
           </div>
 
-          <chat-feature
+<!--           <chat-feature
             :inputDisable="inputDisable"
             :rightDatas="rightDatas"
             @onRightSelectMsg="onRightSelectMsg"
-          ></chat-feature>
+          ></chat-feature> -->
+          <!-- ----------------Lijuce add------------------------------- -->
+          <div class="chat-footer">
+            <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input>
+            <el-button class="send-sure" @click="onSubmit">发送</el-button>
+          </div>
+          <!-- --------------------------------------------------------- -->
         </div>
+
       </div>
     </el-main>
   </el-container>
 </template>
 
 <script>
-import ChatItem from "../../components/ChatItem.vue";
-import ChatFeature from "../../components/ChatFeature.vue";
-import axios from "axios";
+import ChatItem from '../../components/ChatItem.vue'
+import ChatFeature from '../../components/ChatFeature.vue'
+import axios from "axios" ;
 
 export default {
   components: {
-    "chat-item": ChatItem,
-    "chat-feature": ChatFeature
+    'chat-item': ChatItem,
+    'chat-feature': ChatFeature
   },
-
-  data: function() {
+  data: function () {
     return {
+      title: '和AI机器人聊天中',
       inputDisable: true, // 是否正在输入
       chatDatas: [], // 所有的聊天数据
       selectMsgData: {}, // 选中的聊天数据
       showMsgDatas: [], // 展示出的聊天数据
-      rightDatas: [] // 要说的话
-    };
-  },
-
-  created: function() {
-    this.loadChatData();
-  },
-
-  methods: {
-    scrollContent: function() {
-      this.$nextTick(function() {
-        var msgContent = this.$refs.messageContent;
-        msgContent.scrollTop = msgContent.scrollHeight;
-      });
-    },
-
-    // 获取聊天数据
-    loadChatData: function() {
-      // Que1：
-      // js特性 自动插入分号，若打开eslint，则在语句结尾带有‘;’的地方报错。报错内容为：extra semicolon。
-      // 参考blog：http://inimino.org/~inimino/blog/javascript_semicolons
-      var $this = this;
-      this.$http.get("../../static/chatData.json").then(function(res) {
-        $this.chatDatas = res.data.msgData;
-        $this.setMsg("001");
-      });
-    },
-
-    // 自动对话
-    setMsg: function(selectId) {
-      // 获取到指定的数据条目
-      this.selectMsgData = this.chatDatas.filter(item => {
-        return item.id === selectId;
-      })[0];
-
-      // 设置leftData
-      this.setShowMsgDatas(this.selectMsgData.leftMsg, "left");
-
-      // 获取到所有的rightData
-      this.rightDatas = this.selectMsgData.rightData;
-    },
-
-    // 设置显示数据
-    setShowMsgDatas: function(msgData, type) {
-      var $this = this;
-      // 已添加进展示数据的条目
-      var i = 0;
-      // 对数据的类型进行判断，是属于‘对方’还是‘我’
-      if (type === "left") {
-        // 修改我们的title，我们需要在data中定义我们的title
-        $this.title = "LGD_Sunday正在输入...";
-        // inputDisable，表示对方正在输入，这个时候‘我’是不可以进行选择的。
-        $this.inputDisable = true;
-        // 通过定时器来制造‘对方’输入的延迟
-        var interval = setInterval(function() {
-          $this.showMsgDatas.push({
-            id: $this.selectMsgData.id,
-            msg: msgData[i],
-            type: type
-          });
-          // 添加完成之后判断当前的content是否需要滚动
-          $this.scrollContent();
-          // 展示数据条目自增
-          i++;
-          // 判断需要展示的数据是否已经全部展示完毕
-          if (i >= msgData.length) {
-            // 修改我们的title
-            $this.title = "和LGD_Sunday聊天中";
-            // 重置inputDisable
-            $this.inputDisable = false;
-            // 清掉定时器
-            window.clearInterval(interval);
-          }
-        }, 1000);
-      } else {
-        // 如果是‘我’发送的消息，则直接push到showMsgDatas
-        this.showMsgDatas.push({
-          id: $this.selectMsgData.id,
-          msg: msgData[0],
-          type: type
-        });
-        // 执行页面滚动
-        $this.scrollContent();
-      }
-    },
-
-    // 选择要说的话
-    onRightSelectMsg: function(item) {
-      // 调用setShowMsgDatas放置我的聊天数据
-      console.log("Chat.vue # onRightSelectMsg");
-      this.setShowMsgDatas(item.rightMsg, "right");
-      // 调用setMsg执行我的聊天信息的自动对话
-      this.setMsg(item.id);
+      rightDatas: [], // 要说的话
+      input_text: "感冒应该吃些什么食物",
+      id: "123",
+      message: "111"
     }
+  },
+  created: function () {
+    this.loadChatData()
+  },
+  methods: {
+    // 滚动条判断
+    scrollContent: function () {
+      this.$nextTick(function () {
+        var msgContent = this.$refs.content
+        // var msgContent =  document.querySelector('messageContent')
+        // msgContent.scrollTop = msgContent.scrollHeight
+        msgContent.scrollIntoView()
+      })
+    },
+    // 获取聊天数据
+    loadChatData: function () {
+      var $this = this
+    
+      axios.get("api/medical",
+        {params: {
+          q: this.input_text,
+          id: "123"}})
+        .then(function (res) {
+          $this.showMsgDatas.push({
+            msg: $this.input_text,
+            type: 'left'
+          })
+          $this.showMsgDatas.push({
+            msg: res.data.bot_response,
+            type: 'right'
+          })
+      })
+    },
+      // 选择要说的话
+    onSubmit () {
+        console.log('Chat.vue # loadChatData')
+        this.loadChatData()
+        this.scrollContent()
+      }
   }
-};
+}
 </script>
 
 <style>
@@ -164,7 +121,7 @@ export default {
 }
 
 .message-content {
-  position: relative;
+  /*position: relative;*/
   overflow-x: hidden;
   overflow-y: scroll;
 }
@@ -176,5 +133,46 @@ export default {
 
 .animated {
   animation-duration: 0.4s;
+}
+
+.chat-footer {
+  /* background: linear-gradient(to bottom, #f3f3f3, #e3e2e2); */
+  height: 46px;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  right: 0;
+  z-index: 90;
+  width: 100%;
+}
+
+.send-msg {
+  position: float;
+  display: inline-block;
+  width: 80%;
+  height: 30px;
+  border-radius: 4px;
+  float: left;
+  color: #bbb;
+  margin: 6px 0 0px 0px;
+  text-align: left;
+  line-height: 30px;
+  padding-left: 0px;
+}
+
+.send-sure {
+  display: inline-block;
+  width: 12%;
+  height: 40px;
+  border: 1px solid rgb(236, 225, 225);
+  border-radius: 6px;
+  float: right;
+  background-color: #fff;
+  color: rgb(124, 124, 124);
+  margin: 6px 0px 0px 0px;
+  text-align: center;
+  padding: 1px 1px 1px 1px;
+  line-height: 30px;
+  /* padding-left: 8px; */
 }
 </style>
