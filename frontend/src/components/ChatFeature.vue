@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="chat-footer" @click="onTogglePop()">
-<!-- <<<<<<< Updated upstream -->
-<!--       <el-input class="send-msg" placeholder v-model="input" clearable></el-input>
-      <el-button class="send-sure" @click="onSubmit">发送</el-button> -->
-<!-- =======
+    <!-- <div class="chat-footer" @click="onTogglePop()"> -->
+    <!-- <<<<<<< Updated upstream -->
+    <!--       <el-input class="send-msg" placeholder v-model="input" clearable></el-input>
+    <el-button class="send-sure" @click="onSubmit">发送</el-button>-->
+    <!-- =======
       <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input>
       <el-button class="send-sure" @click="onSubmit">发送</el-button> 
->>>>>>> Stashed changes -->
-    </div>
+    >>>>>>> Stashed changes-->
+    <!-- </div> -->
     <!-- <div class="send-msg-pop animatd fast" :class="[togglePop ? 'slideInup' : 'slideOutDown']">
       <div class="chat-footer">
         <div class="send-msg">想要发送的内容...</div>
@@ -46,11 +46,11 @@ export default {
       }
     }
   },
-  // data: function() {
-  //   return {
-  //     togglePop: false // 展示浮窗
-  //   };
-  // },
+  data: function() {
+    return {
+      togglePop: false // 展示浮窗
+    };
+  },
   data() {
     return {
       input: "",
@@ -58,10 +58,10 @@ export default {
     };
   },
   methods: {
-      // onSubmit () {
-      //   this.loadChatData()
-      //   this.scrollContent()
-      // }
+    // onSubmit () {
+    //   this.loadChatData()
+    //   this.scrollContent()
+    // }
     // // 控制pop的显示和隐藏
     // onTogglePop: function() {
     //   // 当”对方“正在输入的时候，不允许点击
@@ -69,7 +69,7 @@ export default {
     //     return;
     //   }
     //   this.togglePop = !this.togglePop;
-    // },
+    // }
     // // 选择要说的话
     // onRightSelectMsg: function(item) {
     //   // 调用父组件（Chat.vue）中的onRightSelectMsg方法
@@ -82,9 +82,9 @@ export default {
 };
 </script>
 
-<style>
-.chat-footer {
-  /* background: linear-gradient(to bottom, #f3f3f3, #e3e2e2); */
+<style scoped>
+/* .chat-footer {
+  background: linear-gradient(to bottom, #f3f3f3, #e3e2e2);
   height: 46px;
   position: absolute;
   bottom: 0;
@@ -92,9 +92,9 @@ export default {
   right: 0;
   z-index: 90;
   width: 100%;
-}
+} */
 
-.send-msg {
+/* .send-msg {
   position: float;
   display: inline-block;
   width: 80%;
@@ -106,11 +106,11 @@ export default {
   text-align: left;
   line-height: 30px;
   padding-left: 0px;
-}
+} */
 .el-input {
   width: 80%;
 }
-.send-sure {
+/* .send-sure {
   display: inline-block;
   width: 12%;
   height: 40px;
@@ -123,16 +123,15 @@ export default {
   text-align: center;
   padding: 1px 1px 1px 1px;
   line-height: 30px;
-  /* padding-left: 8px; */
-}
-
-.send-btn img {
+} */
+/* padding-left: 8px; */
+/* .send-btn img {
   width: 32px;
   margin: 6px 18px 6px 6px;
   float: right;
-}
+} */
 
-.send-msg-pop {
+/* .send-msg-pop {
   z-index: 100;
   position: absolute;
   width: 70%;
@@ -164,18 +163,18 @@ export default {
   min-height: 22px;
   line-height: 22px;
   list-style: none;
-}
+} */
 
-.pop-bg {
+/* .pop-bg {
   position: absolute;
   top: 0px;
   left: 0px;
   right: 0px;
   bottom: 0px;
   background-color: rgba(43, 42, 42, 0.47);
-}
+} */
 
-.fast {
+/* .fast {
   animation-duration: 0.2s;
 }
 
@@ -185,5 +184,5 @@ export default {
 
 .fadeOut {
   display: none;
-}
+} */
 </style>
