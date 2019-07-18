@@ -9,20 +9,20 @@ export const menuGroup = [
         path: '',
         name: '数据集上传'
       },
-      {
-        label: '数据集下载',
-        path: '',
-        name: '数据集下载'
-      },
+      // {
+      //   label: '数据集下载',
+      //   path: '',
+      //   name: '数据集下载'
+      // },
       {
         label: '数据集删除',
         path: '',
         name: '数据集删除'
       },
       {
-        label: '数据集查看',
+        label: '数据集列表',
         path: '',
-        name: '数据集查看'
+        name: '数据集列表'
       }
     ]
   },

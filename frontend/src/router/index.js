@@ -4,7 +4,7 @@ import Router from 'vue-router'
 import Container from '@/Layout/Container'
 
 import DelelteData from '@/pages/DataCollection/DelelteData'
-import Download from '@/pages/DataCollection/Download'
+// import Download from '@/pages/DataCollection/Download'
 import Upload from '@/pages/DataCollection/Upload'
 import Query from '@/pages/DataCollection/Query'
 import TextSummar from '@/pages/SpaceNLP/TextSummar'
@@ -26,18 +26,18 @@ export default new Router({
           path: 'DataCollection/Upload',
           component: Upload
         },
-        {
-          name: '数据集下载',
-          path: 'DataCollection/Download',
-          component: Download
-        },
+        // {
+        //   name: '数据集下载',
+        //   path: 'DataCollection/Download',
+        //   component: Download
+        // },
         {
           name: '数据集删除',
           path: 'DataCollection/Delete',
           component: DelelteData
         },
         {
-          name: '数据集查看',
+          name: '数据集列表',
           path: 'DataCollection/Query',
           component: Query
         }
