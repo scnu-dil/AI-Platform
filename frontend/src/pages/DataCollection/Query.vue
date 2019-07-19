@@ -200,6 +200,8 @@ export default {
   color: #333;
   text-align: center;
   line-height: 5em;
+  height: 700px;
+  margin: -20px;
 }
 body > .el-container {
   margin-bottom: 2.5em;

@@ -1,62 +1,41 @@
 <template>
   <!-- <div class="nlp-textsum textsum">文本摘要</div> -->
-  <el-container>
-    <el-main>
-      <div id="intext">
-        <h2>Subtitle</h2>
-        <div class="summarization">
-          <input placeholder="请输入标题" class="subinput"  v-model="sub_input">
-        </div>
-        <div class="stext">
-          <textarea type="submit" placeholder="请输入正文" class="textinput" v-model="text_input"></textarea>
-          <!-- <div class="surebutton"> -->
-          <el-button type="primary" name="submit" @click="onSubmit" round>生成摘要</el-button>
-          <!-- </div> -->
-        </div>
+  <!-- <el-container> -->
+  <el-main>
+    <div id="intext">
+      <h2>Subtitle</h2>
+      <div class="summarization">
+        <input placeholder="请输入标题" class="subinput" />
       </div>
-      <div id="outtext">
-        <h2>Text Summarization</h2>
-        <div class="oputtext">
-          <textarea placeholder="结果显示" class="from_input">{{ summary_result }}</textarea>
-          <!-- <input type="text" class="from_input" placeholder="结果显示"> -->
-        </div>
+      <div class="stext">
+        <textarea type="submit" placeholder="请输入正文" class="textinput"></textarea>
+        <!-- <div class="surebutton"> -->
+        <el-button type="primary" name="submit" onclick="onSubmit()" round>生成摘要</el-button>
+        <!-- </div> -->
       </div>
-    </el-main>
-  </el-container>
+    </div>
+    <div id="outtext">
+      <h2>Text Summarization</h2>
+      <div class="oputtext">
+        <textarea placeholder="结果显示" class="from_input"></textarea>
+        <!-- <input type="text" class="from_input" placeholder="结果显示"> -->
+      </div>
+    </div>
+  </el-main>
+  <!-- </el-container> -->
 </template>
 
 <script>
-import HeaderTop from "../../Layout/HeaderTop.vue";
-import axios from "axios" ;
-
 export default {
+  name: "textsum",
   data() {
     return {
-      sub_input: "",
-      text_input: "",
-      summary_result: ""
+      input: ""
     };
-  },
-  components: {
-    headertop: HeaderTop
-  },
-  methods: {
-    onSubmit() {
-      const path = `http://47.107.228.165/api/summary`;
-      axios.get(path,
-      {params: {sub_input: this.sub_input,
-		text_input: this.text_input}})
-        .then(response => {
-          this.summary_result = response.data.result
-        })
-        .catch(error => {
-          console.log(error)
-        })
-    }
   }
 };
 </script>
-<style>
+<style scoped>
 body {
   margin: 0px;
 }
@@ -73,6 +52,7 @@ body {
   text-align: center;
   line-height: 80px;
   height: 700px;
+  margin: -20px;
 }
 body > .el-container {
   margin-bottom: 40px;

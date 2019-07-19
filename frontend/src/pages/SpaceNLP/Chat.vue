@@ -22,19 +22,25 @@
         <!-- --------------------------------------------------------- -->
       </div>
       <div class="chat-footer" ref="messageContent">
-        <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input>
+        <el-input placeholder="请输入内容" v-model="input_text" class="send-msg" clearable></el-input>
+        <!-- <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input> -->
         <el-button class="send-sure" @click="onSubmit">发送</el-button>
       </div>
     </div>
   </el-main>
 </template>
 
-<script>
+<script scoped>
 import ChatItem from "../../components/ChatItem.vue";
 // import  from "../../components/ChatFeature.vue";
 import axios from "axios";
 
 export default {
+  data() {
+    return {
+      input_text: ""
+    };
+  },
   components: {
     "chat-item": ChatItem
     // "chat-feature": ChatFeature
@@ -47,24 +53,23 @@ export default {
   //   this.scrollToBottom();
   // },
 
-  watch: {
-    processData: "scrollToBottom"
-  },
-  scrollToBottom: function() {
-    this.$nextTick(() => {
-      var div = this.$el.querySelector("message-content");
-      div.scrollTop = div.scrollHeight;
-    });
-  },
+  // watch: {
+  //   processData: "scrollToBottom"
+  // },
+  // scrollToBottom: function() {
+  //   this.$nextTick(() => {
+  //     var div = this.$el.querySelector("message-content");
+  //     div.scrollTop = div.scrollHeight;
+  //   });
+  // },
   data: function() {
     return {
-      title: "和AI机器人聊天中",
       inputDisable: true, // 是否正在输入
       chatDatas: [], // 所有的聊天数据
       selectMsgData: {}, // 选中的聊天数据
       showMsgDatas: [], // 展示出的聊天数据
       rightDatas: [], // 要说的话
-      input_text: " ",
+      input_text: "",
       id: "123",
       message: "111"
     };
@@ -74,20 +79,20 @@ export default {
   // },
   methods: {
     // 滚动条判断
-    // scrollContent: function() {
-    //   this.$nextTick(function() {
-    //     var msgContent = this.$refs.messageContent;
-    //     // var msgContent = document.querySelector("messageContent");
-    //     msgContent.scrollTop = msgContent.scrollHeight;
-    //     // msgContent.scrollIntoView();
-    //   });
-    // },
-    scrollToBottom() {
-      this.$nextTick(() => {
-        var div = this.$el.querySelector("message-content");
-        div.scrollTop = div.scrollHeight;
+    scrollContent: function() {
+      this.$nextTick(function() {
+        var msgContent = this.$refs.messageContent;
+        // var msgContent = document.querySelector("messageContent");
+        msgContent.scrollTop = msgContent.scrollHeight;
+        // msgContent.scrollIntoView();
       });
     },
+    // scrollToBottom() {
+    //   this.$nextTick(() => {
+    //     var div = this.$el.querySelector("message-content");
+    //     div.scrollTop = div.scrollHeight;
+    //   });
+    // },
 
     // 获取聊天数据
     loadChatData: function() {
@@ -121,7 +126,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .contentbox {
   position: relative;
   width: 80%;
