@@ -32,6 +32,23 @@ export default {
     return {
       input: ""
     };
+  },
+  components: {
+    headertop: HeaderTop
+  },
+  methods: {
+    onSubmit() {
+      const path = `http://127.0.0.1/api/summary`;
+      axios.get(path,
+      {params: {sub_input: this.sub_input,
+		text_input: this.text_input}})
+        .then(response => {
+          this.summary_result = response.data.result
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
   }
 };
 </script>
