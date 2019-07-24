@@ -18,13 +18,12 @@
       </div>
     </div>
   </el-main>
-</template>
+</template> 
 
 <script scoped>
 import ChatItem from "../../components/ChatItem.vue";
 // import  from "../../components/ChatFeature.vue";
 import axios from "axios";
-
 export default {
   data() {
     return {
@@ -42,7 +41,6 @@ export default {
   // updated: function() {
   //   this.scrollToBottom();
   // },
-
   // watch: {
   //   processData: "scrollToBottom"
   // },
@@ -83,11 +81,9 @@ export default {
     //     div.scrollTop = div.scrollHeight;
     //   });
     // },
-
     // 获取聊天数据
     loadChatData: function() {
       var $this = this;
-
       axios
         .get("api/medical", {
           params: {
@@ -98,11 +94,11 @@ export default {
         .then(function(res) {
           $this.showMsgDatas.push({
             msg: $this.input_text,
-            type: "left"
+            type: "right"
           });
           $this.showMsgDatas.push({
             msg: res.data.bot_response,
-            type: "right"
+            type: "left"
           });
         });
     },
@@ -126,12 +122,10 @@ export default {
   height: 44px;
   display: flex;
 }
-
 .navbar-text {
   margin: 0px auto;
   line-height: 44px;
 }
-
 .content {
   position: relative;
   height: 500px;
@@ -141,11 +135,9 @@ export default {
 }
 /*position: relative;*/
 /* .message-content ul {
-
   overflow-x: hidden;
   overflow-y: scroll;
 } */
-
 .message-content li {
   padding: 6px 12px;
   list-style: none;
@@ -155,11 +147,9 @@ export default {
   margin: 6px 18px 6px 6px;
   float: right;
 }
-
 .animated {
   animation-duration: 0.4s;
 }
-
 .chat-footer {
   /* background: linear-gradient(to bottom, #f3f3f3, #e3e2e2); */
   height: 46px;
@@ -170,7 +160,6 @@ export default {
   z-index: 90;
   width: 100%;
 }
-
 .send-msg {
   position: float;
   display: inline-block;
@@ -184,7 +173,6 @@ export default {
   line-height: 30px;
   padding-left: 0px;
 }
-
 .send-sure {
   display: inline-block;
   width: 12%;
@@ -200,15 +188,12 @@ export default {
   line-height: 30px;
   /* padding-left: 8px; */
 }
-
 .fast {
   animation-duration: 0.2s;
 }
-
 .fadeIn {
   display: block;
 }
-
 .fadeOut {
   display: none;
 }

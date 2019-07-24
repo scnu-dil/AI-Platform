@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import HeaderTop from "../../Layout/HeaderTop.vue";
 export default {
   name: "textsum",
   data() {
