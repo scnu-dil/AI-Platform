@@ -64,6 +64,10 @@ export const menuGroup = [
         name: '文本摘要'
       },
       {
+        label: '文本生成',
+        path: ''
+      },
+      {
         label: '聊天机器人',
         path: '',
         name: '聊天机器人'
@@ -72,51 +76,74 @@ export const menuGroup = [
         label: '对话系统',
         path: '',
         name: '对话系统'
-        // children: [
-        //   {
-        //     label: '对话系统',
-        //     path: '',
-        //     name: '对话系统'
-        //   }
-        // ]
+      },
+      {
+        label: '语音识别',
+        path: ''
       }
     ]
   },
   {
-    label: '情绪识别',
-    icon: 'el-icon-setting',
-    path: ''
-  },
-  {
-    label: '语音识别',
-    icon: 'el-icon-mic'
-  },
-  {
-    label: '人脸识别',
-    icon: 'el-icon-s-check',
+    label: '计算机视觉',
+    icon: 'el-icon-camera-solid',
     children: [
       {
-        label: '人脸检测',
+        label: '人脸识别',
         path: ''
       },
       {
-        label: '人脸匹配',
+        label: '情绪识别',
         path: ''
       },
       {
-        label: '表情识别',
+        label: '行人识别',
+        path: ''
+      },
+      {
+        label: '动作识别',
+        path: ''
+      },
+      {
+        label: '物体识别',
         path: ''
       }
     ]
-  },
-  {
-    label: '动作识别',
-    path: '',
-    icon: 'el-icon-video-camera-solid'
-  },
-  {
-    label: '物体识别',
-    path: '',
-    icon: 'el-icon-camera-solid'
   }
+  // {
+  //   label: '情绪识别',
+  //   icon: 'el-icon-setting',
+  //   path: ''
+  // },
+  // {
+  //   label: '语音识别',
+  //   icon: 'el-icon-mic'
+  // },
+  // {
+  //   label: '人脸识别',
+  //   icon: 'el-icon-s-check',
+  //   children: [
+  //     {
+  //       label: '人脸检测',
+  //       path: ''
+  //     },
+  //     {
+  //       label: '人脸匹配',
+  //       path: ''
+  //     },
+  //     {
+  //       label: '表情识别',
+  //       path: ''
+  //     }
+  //   ]
+  // },
+  // {
+  //   label: '动作识别',
+  //   path: '',
+  //   icon: 'el-icon-video-camera-solid'
+  // },
+  // {
+  //   label: '物体识别',
+  //   path: '',
+  //   icon: 'el-icon-camera-solid'
+  // }
 ]

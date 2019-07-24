@@ -15,19 +15,19 @@
         <el-table-column label="日期">
           <template slot-scope="scope">{{ scope.row.date }}</template>
         </el-table-column>
-        <el-table-column prop="modelname" label="模型名称"></el-table-column>
+        <el-table-column prop="modelname" label="数据集名称"></el-table-column>
         <el-table-column prop="uploader" label="上传者" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
             <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-            <el-button size="mini" type="success" @click="handleDelete(scope.$index, scope.row)">下载</el-button>
+            <el-button size="mini" type="success" @click="outportData(scope.$index, scope.row)">下载</el-button>
           </template>
         </el-table-column>
       </el-table>
       <div class="choosebox" style="margin-top: 20px">
         <!-- <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button> -->
         <el-button @click="toggleSelection()">取消选择</el-button>
-        <el-button type="primary" @click="importData">导入</el-button>
+        <!-- <el-button type="primary" @click="importData">导入</el-button> -->
         <el-button type="primary" @click="outportData">导出</el-button>
       </div>
       <!-- 导入 -->
@@ -86,13 +86,13 @@ export default {
       tableData3: [
         {
           date: "2019-07-19",
-          modelname: "VGG16",
+          modelname: "Market1501",
           uploader: "Lyndsey"
         },
         {
           date: "2019-07-19",
-          modelname: "DenseNet",
-          uploader: "Lyndsey"
+          modelname: "UCF101",
+          uploader: "Lijuce"
         }
       ],
       multipleSelection: [],
@@ -149,7 +149,7 @@ export default {
     },
     beforeUpload(file) {
       //上传前配置
-      this.importHeaders.cityCode = "上海"; //可以配置请求头
+      // this.importHeaders.cityCode = "上海"; //可以配置请求头
       let excelfileExtend = ".xls,.xlsx,.csv"; //设置文件格式
       let fileExtend = file.name
         .substring(file.name.lastIndexOf("."))

@@ -2,7 +2,7 @@
   <el-main>
     <div class="contentbox">
       <div class="navbar">
-        <h2 class="navbar-text">聊天机器人</h2>
+        <h2 class="navbar-text">医疗对话系统</h2>
       </div>
       <!-- 这是消息框的容器 -->
       <div class="content">
@@ -11,19 +11,9 @@
             <chat-item :chatItemObj="item"></chat-item>
           </li>
         </ul>
-
-        <!--           <chat-feature
-            :inputDisable="inputDisable"
-            :rightDatas="rightDatas"
-            @onRightSelectMsg="onRightSelectMsg"
-        ></chat-feature>-->
-        <!-- ----------------Lijuce add------------------------------- -->
-
-        <!-- --------------------------------------------------------- -->
       </div>
       <div class="chat-footer" ref="messageContent">
         <el-input placeholder="请输入内容" v-model="input_text" class="send-msg" clearable></el-input>
-        <!-- <el-input class="send-msg" placeholder="请输入消息内容" v-model="input_text" clearable></el-input> -->
         <el-button class="send-sure" @click="onSubmit">发送</el-button>
       </div>
     </div>
