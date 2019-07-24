@@ -33,9 +33,7 @@
      <el-button size="small" type="primary" name="submit" @click="submitUpload">立即上传</el-button>
      <el-button size="small" @click="cancel_upload">取消</el-button>
       </div>
-      </div>
-    </el-main>
-  </el-container>
+  <!-- </el-container> -->
 </template>
 
 <script>
@@ -109,12 +107,15 @@ export default {
 
 </script>
 
-<style>
-.el-main {
+<style scoped>
+.bgbox {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
   line-height: 5em;
+  height: 700px;
+  margin: -20px;
+  padding: px;
 }
 body > .el-container {
   margin-bottom: 2.5em;

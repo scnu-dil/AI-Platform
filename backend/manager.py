@@ -84,6 +84,5 @@ def upload_file():
     return jsonify(response)
     
 if __name__ == '__main__':
-  # app.run(host="47.107.228.165")
   app.run()
 

@@ -1,32 +1,32 @@
 <template>
-  <el-container>
-    <el-main>
-      <div id="chatrobotbox">
-        <div class="chatheader">
-          <h2>聊天机器人</h2>
-        </div>
-        <div class="messagebox">
-          <div class="messagelist"></div>
-          <!-- <textarea type="text" class="messagelist" placeholder="消息显示" readonly="readonly"></textarea> -->
-          <ul>
-            <!-- <li v-for="item in message_array">{{item}}</li> -->
-          </ul>
-        </div>
-        <div class="inputbox">
-          <textarea
-            type="text"
-            v-model="message"
-            class="inputdata"
-            placeholder="请输入"
-            readonly="readonly"
-          ></textarea>
-          <div class="surebox">
-            <el-button v-on:click="dealMessage">确认</el-button>
-          </div>
+  <!-- <el-container> -->
+  <el-main>
+    <div id="chatrobotbox">
+      <div class="chatheader">
+        <h2>聊天机器人</h2>
+      </div>
+      <div class="messagebox">
+        <div class="messagelist"></div>
+        <!-- <textarea type="text" class="messagelist" placeholder="消息显示" readonly="readonly"></textarea> -->
+        <ul>
+          <!-- <li v-for="item in message_array">{{item}}</li> -->
+        </ul>
+      </div>
+      <div class="inputbox">
+        <textarea
+          type="text"
+          v-model="message"
+          class="inputdata"
+          placeholder="请输入"
+          readonly="readonly"
+        ></textarea>
+        <div class="surebox">
+          <el-button v-on:click="dealMessage">确认</el-button>
         </div>
       </div>
-    </el-main>
-  </el-container>
+    </div>
+  </el-main>
+  <!-- </el-container> -->
 </template>
 
 <script>
@@ -52,12 +52,14 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .el-main {
   background-color: #e9eef3;
   color: #333;
   text-align: center;
   line-height: 5em;
+  margin: -20px;
+  height: 700px;
 }
 #chatrobotbox {
   height: 500px;
