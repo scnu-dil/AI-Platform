@@ -70,7 +70,20 @@ def catch_all(path):
 #     #     return requests.get('http://localhost:8080/{}'.format(path)).text
     return render_template("index.html")
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+  if request.method == 'POST':
+    file = request.files.get('file')
+    if file is None:
+      response = {'status': 404}
+    else:
+      file.save(file.filename)
+      response = {
+        'status': 200
+      }
+    return jsonify(response)
+    
 if __name__ == '__main__':
-  app.run(host="47.107.228.165")
-  #app.run()
+  # app.run(host="47.107.228.165")
+  app.run()
 
