@@ -8,6 +8,13 @@
 >down下后，按以下命令执行
 
 ```
+运行句法分析所需环境（不运行可以不理）
+Python3.6及以上
+Jdk1.8及以上
+下载斯坦福StanfordNLP工具包
+stanford-corenlp-full-2018-10-05 将该文件放到与manager.py文件同一个目录中
+stanford-chinese-corenlp-2018-10-05-models.jar将该文件放进上一个文件目录中
+
 //进入down后的AI-Platform/backend目录
 ~$ virtualenv --no-site-packages venv
 //安装前期已有的依赖包

@@ -19,6 +19,10 @@
           <h2>Keywords</h2>
           <textarea type="text" class="from_input3" placeholder="结果显示" readonly="readonly">{{ key_word }}</textarea>
         </div>
+         <div class="nlpbox1">
+          <h2>Parsing</h2>
+          <textarea type="text" class="from_input4" placeholder="结果显示" readonly="readonly">{{ paring }}</textarea>
+        </div>
       </div>
     </el-main>
   </el-container>
@@ -34,7 +38,8 @@ export default {
       input: "数据智能实验室",
       split_result: "",
       word_tag: "",
-      key_word: ""
+      key_word: "",
+      paring: ""
     };
   },
   components: {
@@ -45,7 +50,7 @@ export default {
   },
   methods: {
     onSubmit () {
-      const path = `http://47.107.228.165/api/nlp`;
+      const path = `http://127.0.0.1:5000/api/nlp`;
       
       axios.get(path,
       {params: {input: this.input}})
@@ -53,6 +58,7 @@ export default {
           this.split_result = response.data.split_result
           this.word_tag = response.data.word_tag
           this.key_word = response.data.key_word
+          this.paring = response.data.Paring
   })
         .catch(error => {
           console.log(error)
@@ -99,22 +105,23 @@ body > .el-container {
   width: 60%;
 }
 #nlpbox {
-  width: 90%;
-  padding: 0em 5.2em 1.2em 15em;
+  width: 80%;
+  padding: 0em 4.2em 1em 14em;
   text-align: left;
   position: relative;
 }
 .nlpbox1 {
-  height: 12em;
+  height: 10em;
   width: 80%;
 }
 h2 {
-  margin-block-start: 0.2em;
-  margin-block-end: 0.2em;
+  margin-block-start: 0.1em;
+  margin-block-end: 0.1em;
 }
 .from_input1,
 .from_input2,
-.from_input3 {
+.from_input3,
+.from_input4 {
   -webkit-appearance: none;
   background-color: #fff;
   background-image: none;

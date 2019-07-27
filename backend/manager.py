@@ -4,6 +4,7 @@ from flask import jsonify
 from flask_cors import CORS
 from snownlp import SnowNLP
 from textsummary import TextSummary
+from stanfordcorenlp.corenlp import StanfordCoreNLP
 
 app = Flask(__name__,
             static_folder="../frontend/dist/static",
@@ -27,15 +28,20 @@ def Part_of_Speech_tagging(text):
   key = s.keywords(3)
   return word_tag, key
 
+
 @app.route('/api/nlp')
 def home():
+
+  nlp_parsing = StanfordCoreNLP('stanford-corenlp-full-2018-10-05',quiet = False,lang = 'zh')
   input_text = request.args.get('input')
   result = word_split(input_text)
   word_tagging, key_words = Part_of_Speech_tagging(input_text)
+  result_paring = nlp_parsing.parse(input_text)
   response = {
     'split_result': result,
     'word_tag': word_tagging,
-    'key_word': key_words
+    'key_word': key_words,
+    'Paring': result_paring
   }
 
   return jsonify(response)
