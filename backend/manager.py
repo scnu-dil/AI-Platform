@@ -88,7 +88,19 @@ def upload_file():
         'status': 200
       }
     return jsonify(response)
-    
+
+@app.route('/download/<filename>', methods=['GET', 'POST'])
+def download_file(filename):
+  if request.method == 'GET':
+    # fullfilename = request.args.get('filename')
+    response = make_response(send_from_directory('./', "test2.csv", as_attachment=True))
+    response.headers["Content-Disposition"] = "attachment; filename=test.csv"
+    response.headers["Content_Type"] = "application/octet-stream"
+
+    # return  send_from_directory('./', "test.png", as_attachment=True)
+    return response
+
+
 if __name__ == '__main__':
   app.run()
 
