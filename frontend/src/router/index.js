@@ -11,7 +11,7 @@ import TextSummar from '@/pages/SpaceNLP/TextSummar'
 import TextSplit from '@/pages/SpaceNLP/TextSplit'
 import ChatRobot from '@/pages/SpaceNLP/ChatRobot'
 import Chat from '@/pages/SpaceNLP/Chat'
-
+import FaceRecognition from '@/pages/ComputerVision/FaceRecognition'
 Vue.use(Router)
 
 export default new Router({
@@ -75,6 +75,18 @@ export default new Router({
         //     component: Chat
         //   }
         // ]
+      ]
+    },
+	 {
+      path: '/',
+      component: Container,
+      redirect: '/ComputerVision/FaceRecognition',
+      children: [
+        {
+          name: '人脸识别',
+          path: '/ComputerVision/FaceRecognition',
+          component: FaceRecognition
+        },
       ]
     }
   ]

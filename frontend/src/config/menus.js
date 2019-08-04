@@ -89,7 +89,8 @@ export const menuGroup = [
     children: [
       {
         label: '人脸识别',
-        path: ''
+        path: '',
+	name:'人脸识别'
       },
       {
         label: '情绪识别',

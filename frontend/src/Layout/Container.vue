@@ -45,7 +45,7 @@ export default {
 <style scoped>
 .wrapper {
   height: 120vh;
-  overflow: hidden;
+  overflow: auto;
 }
 .main {
   height: 100vh - 60px;

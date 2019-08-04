@@ -63,12 +63,12 @@ def chat_robot():
 
   return jsonify(response)
 
-@app.route('/', defaults={'path': ''})
+@app.route('/', defaults={'path': 'http://localhost:8080'})
 @app.route('/<path:path>')
 def catch_all(path):
 #     # if app.debug:
-#     #     return requests.get('http://localhost:8080/{}'.format(path)).text
-    return render_template("index.html")
+    return requests.get('http://localhost:8080/{}'.format(path)).text
+ #   return render_template("http://localhost:8080")
 
 @app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
