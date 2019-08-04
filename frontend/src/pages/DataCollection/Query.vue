@@ -19,66 +19,18 @@
         <el-table-column prop="uploader" label="上传者" show-overflow-tooltip></el-table-column>
         <el-table-column label="操作">
           <template slot-scope="scope">
-            <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+            <!-- <el-button size="mini" @click="handleEdit(scope.$index, scope.row)">编辑</el-button> -->
             <el-button size="mini" type="success" @click="outportData(scope.$index, scope.row)">下载</el-button>
           </template>
         </el-table-column>
       </el-table>
-      <div class="choosebox" style="margin-top: 20px">
-        <!-- <el-button @click="toggleSelection([tableData3[1], tableData3[2]])">切换第二、第三行的选中状态</el-button> -->
-        <el-button @click="toggleSelection()">取消选择</el-button>
-        <!-- <el-button type="primary" @click="importData">导入</el-button> -->
-        <el-button type="primary" @click="outportData">导出</el-button>
-      </div>
-      <!-- 导入 -->
-      <el-dialog
-        title="导入"
-        :visible.sync="dialogImportVisible"
-        :modal-append-to-body="false"
-        :close-on-click-modal="false"
-        class="dialog-import"
-      >
-        <div :class="{'import-content': importFlag === 1, 'hide-dialog': importFlag !== 1}">
-          <el-upload
-            class="upload-demo"
-            :action="importUrl"
-            :name="name"
-            :headers="importHeaders"
-            :on-preview="handlePreview"
-            :on-remove="handleRemove"
-            :before-upload="beforeUpload"
-            :on-error="uploadFail"
-            :on-success="uploadSuccess"
-            :file-list="fileList"
-            :with-credentials="withCredentials"
-          >
-            <!-- 是否支持发送cookie信息 -->
-            <el-button size="small" type="primary" :disabled="processing">{{uploadTip}}</el-button>
-            <div slot="tip" class="el-upload__tip">上传.xls,.xlsx,.csv类型的文件</div>
-          </el-upload>
-        </div>
-        <div :class="{'import-failure': importFlag === 2, 'hide-dialog': importFlag !== 2}">
-          <div class="failure-tips">
-            <i class="el-icon-warning"></i>导入失败
-          </div>
-          <div class="failure-reason">
-            <h4>失败原因</h4>
-            <ul>
-              <li
-                v-for="(error,index) in errorResults"
-                :key="index"
-              >第{{error.rowIdx + 1}}行，错误：{{error.column}},{{error.value}},{{error.errorInfo}}</li>
-            </ul>
-          </div>
-        </div>
-      </el-dialog>
-
-      <!-- 导出 -->
     </div>
   </el-main>
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
   name: "query",
   data() {
@@ -86,33 +38,51 @@ export default {
       tableData3: [
         {
           date: "2019-07-19",
-          modelname: "Market1501",
+          modelname: "test",
           uploader: "Lyndsey"
-        },
-        {
-          date: "2019-07-19",
-          modelname: "UCF101",
-          uploader: "Lijuce"
         }
-      ],
-      multipleSelection: [],
-      importUrl: "www.baidu.com", //后台接口config.admin_url+'rest/schedule/import/'
-      importHeaders: {
-        enctype: "multipart/form-data",
-        cityCode: ""
-      },
-      name: "import",
-      fileList: [],
-      withCredentials: true,
-      processing: false,
-      uploadTip: "点击上传",
-      importFlag: 1,
-      dialogImportVisible: false,
-      errorResults: []
+      ]
     };
   },
   methods: {
-    toggleSelection(rows) {
+  // 下载文件
+  download (data) {
+  if (!data) {
+    return
+  }
+  // 标签‘a’，触发下载功能
+  let url = window.URL.createObjectURL(new Blob([data]))
+  let link = document.createElement('a')
+  link.style.display = 'none'
+  link.href = url         
+  link.setAttribute('download', 'file.csv')
+
+  document.body.appendChild(link)
+  link.click()
+  },
+  outportData(){
+    axios.get("http://127.0.0.1:5000/download/file",
+    {params: {}})
+    .then(response => {
+      //this.download(response.data)
+      let blob = new Blob([response.data])
+      //let filename=response.headers['Content-Disposition'];
+      let url = window.URL.createObjectURL(blob)
+      let link = document.createElement('a')
+      //link.style.display = 'none'
+      link.href = url
+      link.download = 'test.csv'
+      
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      window.URL.revokeObjectURL(url)
+    })
+    .catch(error => {
+      console.log(error)
+    })
+  }
+/*  toggleSelection(rows) {
       if (rows) {
         rows.forEach(row => {
           this.$refs.multipleTable.toggleRowSelection(row);
@@ -120,17 +90,6 @@ export default {
       } else {
         this.$refs.multipleTable.clearSelection();
       }
-    },
-    handleSelectionChange(val) {
-      //复选框选择回填函数,val返回一整行的数据
-      this.multipleSelection = val;
-    },
-    importData() {
-      this.importFlag = 1;
-      this.fileList = [];
-      this.uploadTip = "点击上传";
-      this.processing = false;
-      this.dialogImportVisible = true;
     },
     outportData() {
       scheduleApi.downloadTemplate();
@@ -140,57 +99,7 @@ export default {
     },
     handleRemove(file, fileList) {
       //文件移除
-    },
-    handleEdit(index, row) {
-      console.log(index, row);
-    },
-    handleDelete(index, row) {
-      console.log(index, row);
-    },
-    beforeUpload(file) {
-      //上传前配置
-      // this.importHeaders.cityCode = "上海"; //可以配置请求头
-      let excelfileExtend = ".xls,.xlsx,.csv"; //设置文件格式
-      let fileExtend = file.name
-        .substring(file.name.lastIndexOf("."))
-        .toLowerCase();
-      if (excelfileExtend.indexOf(fileExtend) <= -1) {
-        this.$message.error("文件格式错误");
-        return false;
-      }
-      this.uploadTip = "正在处理中...";
-      this.processing = true;
-    },
-    //上传错误
-    uploadFail(err, file, fileList) {
-      this.uploadTip = "点击上传";
-      this.processing = false;
-      this.$message.error(err);
-    },
-    //上传成功
-    uploadSuccess(response, file, fileList) {
-      this.uploadTip = "点击上传";
-      this.processing = false;
-      if (response.status === -1) {
-        this.errorResults = response.data;
-        if (this.errorResults) {
-          this.importFlag = 2;
-        } else {
-          this.dialogImportVisible = false;
-          this.$message.error(response.errorMsg);
-        }
-      } else {
-        this.importFlag = 3;
-        this.dialogImportVisible = false;
-        this.$message.info("导入成功");
-        this.doSearch();
-      }
-    },
-    //下载模板
-    download() {
-      //调用后台模板方法,和导出类似
-      scheduleApi.downloadTemplate();
-    }
+    }*/
   }
 };
 </script>
