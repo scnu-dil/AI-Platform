@@ -144,6 +144,10 @@ def home():
 
 @app.route('/api/summary')
 def text_summa():
+    """
+    自动文摘
+    :return:
+    """
   title = request.args.get('sub_input')
   text = request.args.get('text_input')
   textsummary = TextSummary()
@@ -245,6 +249,29 @@ def face():
     }
     return jsonify(response)
 
+def Word_Cloud():
+    """
+    词云生成功能
+    :return:
+    """
+    # if request.method == 'POST':
+    if request.method == 'GET':
+      con = request.args.get("content")
+      # print(con)
+      # 本地图片(最好是白底)路径
+      imagePath = '.\\background.png'
+      # 词云图保存路径
+      imageSavePath = 'static/ptoto/word_cloud.png'
+      img = en_wordcloud_Generater.Word_Cloud.en_wordcloud_text_gen(con, imagePath, imageSavePath, False)  # 返回的是图片类型，可直接保存的格式。但不能转化为url
+      img.save(imageSavePath, optimize=True)  # 添加路劲参数后即可直接保存
+      file_url = photos.url(imageSavePath)  # 将带传图片进行URL转化
+      print("file_url:-----------------", file_url)
+      response = {
+        "img_url": file_url  # 将图片的url传输给前端
+      }
+      return jsonify(response)
+      
+      
 if __name__ == '__main__':
   app.run()
 
