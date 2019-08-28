@@ -26,4 +26,4 @@ textrank4zh==0.3
 stanfordcorenlp==3.9.1.1
 virtualenv==16.6.2
 Werkzeug==0.15.5
-
+wordcloud==1.5.0
